@@ -1,12 +1,11 @@
 <?php
-// Sources used: https://cs4640.cs.virginia.edu
-// https://www.php.net/manual/en/function.preg-match.php
-// https://www.php.net/manual/en/function.similar-text.php
-// Front controller - index.php
-// Welcome page - login.php
-// Game page - question.php
-// Game over - 
+// questions: is it ok where i have session info
+//make refresh not count as a guess?
+//every time user needs a new word, refresh
+//case sensitive comparing
+//store wordList as a class so we can have the comparison info (len, correct chars, in the right place)
 
+session_start();
 // Register the autoloader
 spl_autoload_register(function($classname) {
     include "classes/$classname.php";
@@ -14,6 +13,7 @@ spl_autoload_register(function($classname) {
 
 // Parse the query string for command
 $command = "login";
+
 if (isset($_GET["command"]))
     $command = $_GET["command"];
 
@@ -21,11 +21,16 @@ if (isset($_GET["command"]))
 // a valid session (they didn't get here from the login page),
 // so we should send them over to log in first before doing
 // anything else!
-if (!isset($_COOKIE["email"])) {
+if (!isset($_SESSION["email"])) {
     // they need to see the login
     $command = "login";
+}else{
+    // echo "<script>console.log('Debug Objects: " . $_COOKIE["email"] . "' );</script>";
+    // echo "<script>console.log('Debug Objects: " . $_COOKIE["name"] . "' );</script>";
+
+    echo "<script>console.log('Debug Objects: " . $_SESSION["email"] . "' );</script>";
 }
 
 // Instantiate the controller and run
-$game = new WordGameController($command);
-$game->run();
+$trivia = new WordGameController($command);
+$trivia->run();
