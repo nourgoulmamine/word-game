@@ -3,16 +3,16 @@
     <head>
         <meta charset="UTF-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Nour Goulmamine">
-        <meta name="description" content="CS4640 Word Game Login Page">  
-        <title>Word Game Welcome Page</title>
+        <meta name="author" content="CS4640">
+        <meta name="description" content="CS4640 Trivia Login Page">  
+        <title>Trivia Game Login</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
     </head>
     <body>
         <div class="container" style="margin-top: 15px;">
             <div class="row col-xs-8">
-                <h1>CS4640 Word Game - Get Started</h1>
-                <p> Welcome to our word game!  To get started, enter a username and password.</p>
+                <h1>CS4640 Trivia Game - Get Started</h1>
+                <p> Welcome to our trivia game!  To get started, enter a username and password.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-4">
