@@ -6,29 +6,23 @@ class WordGameController {
     public function __construct($command) {
         $this->command = $command;
     }
-
+ 
     public function run() {
         switch($this->command) {
             case "question":
                 $this->question();
                 break;
-            case "gameover":
-                $this->gameover();
+            case "gameOver":
+                $this->gameOver();
                 break;
             case "logout":
-                $this->destroyCookies();
+                $this->session_destroy();
             case "login":
             default:
                 $this->login();
                 break;
         }
     }
-
-    // Clear all the cookies that we've set
-    private function destroyCookies() {          
-        session_destroy();
-    }
-    
 
     // Display the login page (and handle login logic)
     public function login() {
@@ -49,7 +43,7 @@ class WordGameController {
         include "templates/login.php";
     }
 
-    private function gameover() {
+    private function gameOver() {
         include "templates/gameOver.php";
 
         //if user wants to start a new game, reset these items
@@ -65,11 +59,11 @@ class WordGameController {
     // Load word ?
     private function loadQuestion() {
 
-        $response = file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false);
-        $pieces = explode("\n", $response);
+        $file = file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false);
+        $words = explode("\n", $file);
         
-        $randomIndex = rand(0, count($pieces));
-        return $pieces[$randomIndex]; // return random word
+        $rand = rand(0, count($words));
+        return $words[$rand]; // return random word
     }
 
 
@@ -107,13 +101,24 @@ class WordGameController {
                 // $message = "<div class='alert alert-success'><b>$answer</b> was correct!</div>";
                 header("Location: ?command=gameOver");    
             } else { 
-                $letters = 0; // amount of letters you got right
                 // How many letters you got right
                 $common_letters = similar_text($_SESSION["answer"], $answer);
 
                 // How many letters were in the correct location
                 $real_answer_length = strlen($_SESSION["answer"]);
 
+                $letters = 0; // amount of letters you got right
+/*
+                foreach () {
+                    
+                }
+
+                for ($i = 0; $i < $real_answer_length; $i++) {
+                    if ($answer[i] === $real_answer_length[i]) {
+                        $letters += 1; // increment amount of letters you got in the correct location.
+                    }
+                }
+*/
                 // If the guessed word was too long or short
                 $length = "";
                 $user_answer = strlen($answer);
@@ -126,7 +131,7 @@ class WordGameController {
                     $length = "the same length";
                 }
 
-                $message = "<div class='alert alert-danger'>There were <b>$common_letters</b> characters in the word. There were ___ in the correct place. Your answer was <b>$length</b>.
+                $message = "<div class='alert alert-danger'>There were <b>$common_letters</b> characters in the word. There were <b>$letters</b> in the correct place. Your answer was <b>$length</b>.
                 </div>";            
             }  
         }

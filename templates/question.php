@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="your name">
+        <meta name="author" content="Nour Goulmamine">
         <meta name="description" content="include some description about your page">  
         <title>Trivia Game</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
@@ -11,16 +11,16 @@
     <body>
         <div class="container" style="margin-top: 15px;">
             <div class="row col-xs-8">
-                <h1>CS4640 Television Trivia Game</h1>
+                <h1>CS4640 Television Word Game</h1>
               
-                <h3>Hello <?=$user["name"]?>! Guesses: <?=$user["guesses"]?></h3>
+                <h3>Hello <?=$user["name"]?>!</h3>
                 
             </div>
             <div class="row">
                 <div class="col-xs-8 mx-auto">
                 <form action="?command=question" method="post">
-                    <div class="h-100 p-5 bg-light border rounded-3">
-                    <h2>Question</h2>
+                    <div class="h-40 p-5 bg-light border rounded-3">
+                    <h2>Guess the word. Guess #<?=$user["guesses"]?></h2>
                     <p><?=$question?></p>
                     <p><?=$user["wordList"]?></p>
                     <input type="hidden" name="questionid" value="<?=$question["id"]?>"/>
