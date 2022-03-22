@@ -116,7 +116,7 @@ class WordGameController
                         $letters += 1;
                     }
                 }
-
+ // added
                 // If the guessed word was too long or short
                 $length = "";
                 $user_answer = strlen($answer);
