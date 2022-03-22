@@ -21,7 +21,7 @@ class WordGameController
             case "logout":
                 $this->logout();
             case "login":
-                //            default:
+            default:
                 $this->login();
                 break;
         }
@@ -89,18 +89,14 @@ class WordGameController
 
         // if the user submitted an answer, check it
         if (isset($_POST["answer"])) {
-            $answer = $_POST["answer"]; //retrieve user's answer
-
-            $user["guesses"] += 1; //update number of guesses
+            $answer = $_POST["answer"];
+            $user["guesses"]++; // # of guesses
             $_SESSION["guesses"] = $user["guesses"];
             array_push($_SESSION["wordList"], $answer); // list of guessed words
             $user["wordList"] = json_encode($_SESSION["wordList"]);
 
             //see if user's guess is the answer
             if ($_SESSION["answer"] == strtolower($answer)) {
-                // user answered correctly -- perhaps we should also be better about how we
-                // verify their answers, perhaps use strtolower() to compare lower case only.
-                // $message = "<div class='alert alert-success'><b>$answer</b> was correct!</div>";
                 header("Location: ?command=gameOver");
             } else {
                 // How many letters you got right
@@ -132,10 +128,7 @@ class WordGameController
             }
         }
 
-        // update the question information in cookies
-
         $_SESSION["answer"] = $question;
-
         include("templates/question.php");
     }
 }
