@@ -1,14 +1,17 @@
 <?php
-class WordGameController {
+class WordGameController
+{
 
     private $command;
 
-    public function __construct($command) {
+    public function __construct($command)
+    {
         $this->command = $command;
     }
- 
-    public function run() {
-        switch($this->command) {
+
+    public function run()
+    {
+        switch ($this->command) {
             case "question":
                 $this->question();
                 break;
@@ -18,61 +21,62 @@ class WordGameController {
             case "logout":
                 $this->logout();
             case "login":
-            default:
+                //            default:
                 $this->login();
                 break;
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
     }
 
     // Display the login page (and handle login logic)
-    public function login() {
-        if (isset($_POST["email"]) && !empty($_POST["email"])) { /// validate the email coming in
-    
+    public function login()
+    {
+        if (isset($_POST["email"]) && !empty($_POST["email"])) {
             $_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
             $_SESSION["wordList"] = array();
-            $_SESSION["guesses"] =0;
+            $_SESSION["guesses"] = 0;
             $_SESSION["answer"]  = $this->loadQuestion();
-            if ($_SESSION["answer"]== null) {
+            if ($_SESSION["answer"] == null) {
                 die("No questions available");
             }
             header("Location: ?command=question");
             return;
         }
-
         include "templates/login.php";
     }
 
-    private function gameOver() {
+    private function gameOver()
+    {
         include "templates/gameOver.php";
-
-        //if user wants to start a new game, reset these items
         $_SESSION["wordList"] = array();
-        $_SESSION["guesses"] =0;
+        $_SESSION["guesses"] = 0;
         $_SESSION["answer"]  = $this->loadQuestion();
-         if ($_SESSION["answer"] == null) {
+        if ($_SESSION["answer"] == null) {
             die("No questions available");
         }
     }
 
 
     // Load word ?
-    private function loadQuestion() {
+    private function loadQuestion()
+    {
 
         $file = file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false);
-        $words = explode("\n", $file);
-        
-        $rand = rand(0, count($words));
-        return $words[$rand]; // return random word
+        $words = explode("\n", file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false));
+
+        //        $rand = rand(0, count($words));
+        //        return $words[$rand]; // return random word
     }
 
 
     // Display the question template (and handle question logic)
-    public function question() {
+    public function question()
+    {
         // set user information for the page from the cookie
         $user = [
             "name" => $_SESSION["name"],
@@ -82,29 +86,28 @@ class WordGameController {
         ];
 
         // load the question
-        $question=$_SESSION["answer"];
-        $message="";
+        $question = $_SESSION["answer"];
+        $message = "";
 
         // if the user submitted an answer, check it
         if (isset($_POST["answer"])) {
             $answer = $_POST["answer"]; //retrieve user's answer
-            
+
             $user["guesses"] += 1; //update number of guesses
             $_SESSION["guesses"] = $user["guesses"];
-            
-            array_push($_SESSION["wordList"], $answer); //update list of guessed words
+            array_push($_SESSION["wordList"], $answer); // list of guessed words
             $user["wordList"] = json_encode($_SESSION["wordList"]);
-            
 
-           // echo "<script>console.log('cookie Debug Objects: " .json_encode($_COOKIE["wordList"]). "' );</script>";
-            
-           //see if user's guess is the answer
+
+            // echo "<script>console.log('cookie Debug Objects: " .json_encode($_COOKIE["wordList"]). "' );</script>";
+
+            //see if user's guess is the answer
             if ($_SESSION["answer"] == strtolower($answer)) {
                 // user answered correctly -- perhaps we should also be better about how we
                 // verify their answers, perhaps use strtolower() to compare lower case only.
                 // $message = "<div class='alert alert-success'><b>$answer</b> was correct!</div>";
-                header("Location: ?command=gameOver");    
-            } else { 
+                header("Location: ?command=gameOver");
+            } else {
                 // How many letters you got right
                 $common_letters = similar_text($_SESSION["answer"], $answer);
 
@@ -122,16 +125,15 @@ class WordGameController {
                 $user_answer = strlen($answer);
                 if ($user_answer > $real_answer_length) {
                     $length = "too long";
-                }
-                elseif ($user_answer < $real_answer_length) {
+                } elseif ($user_answer < $real_answer_length) {
                     $length = "too short";
                 } else {
                     $length = "the same length";
                 }
 
                 $message = "<div class='alert alert-danger'>There were <b>$common_letters</b> characters in the word. There were <b>$letters</b> in the correct place. Your answer was <b>$length</b>.
-                </div>";            
-            }  
+                </div>";
+            }
         }
 
         // update the question information in cookies
