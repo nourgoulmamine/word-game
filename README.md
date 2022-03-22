@@ -11,4 +11,4 @@ Once the user enters a guess, if they are incorrect, the game page will be displ
 
 Users may continue guessing until they guess the word, at which point they will be taken to a Game Over screen displaying the results of their game. Users will be prompted to enter their name and email, they will be able to see their prior guesses, and their sessions will be tracked.
 
-Demo: (link)
+Demo: https://cs4640.cs.virginia.edu/ng9sc/hw4/
