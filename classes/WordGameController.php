@@ -110,19 +110,13 @@ class WordGameController {
 
                 // How many letters were in the correct location
                 $real_answer_length = strlen($_SESSION["answer"]);
-
                 $letters = 0; // amount of letters you got right
-/*
-                foreach () {
-                    
-                }
-
                 for ($i = 0; $i < $real_answer_length; $i++) {
-                    if ($answer[i] === $real_answer_length[i]) {
-                        $letters += 1; // increment amount of letters you got in the correct location.
+                    if (strcasecmp($answer[$i], $_SESSION["answer"][$i]) == 0) {
+                        $letters += 1;
                     }
                 }
-*/
+
                 // If the guessed word was too long or short
                 $length = "";
                 $user_answer = strlen($answer);

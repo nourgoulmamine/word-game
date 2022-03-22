@@ -24,7 +24,7 @@
                 <h3>You had <?=$_SESSION["guesses"]?> guesses.</h3>
                 <h3>The word was <?=$_SESSION["answer"]?>!</h3>
                     <div class="text-center">                
-                    <button type="?command=question" class="btn btn-primary">Play Again</button>
+                    <button type="?command=" class="btn btn-primary">Play Again</button>
                     <a href="?command=logout" class="btn btn-danger">End Game</a>
                     </div>
         </div>

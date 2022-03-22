@@ -2,7 +2,9 @@
 // Sources used: https://cs4640.cs.virginia.edu
 // Partnered with Selena Johnson
 
+// Start session
 session_start();
+
 // Register the autoloader
 spl_autoload_register(function($classname) {
     include "classes/$classname.php";
