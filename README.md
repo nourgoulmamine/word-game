@@ -10,3 +10,5 @@ Once the user enters a guess, if they are incorrect, the game page will be displ
 - Whether their word was longer, shorter, or the same length as the target word. 
 
 Users may continue guessing until they guess the word, at which point they will be taken to a Game Over screen displaying the results of their game. Users will be prompted to enter their name and email, they will be able to see their prior guesses, and their sessions will be tracked.
+
+Demo: (link)
