@@ -16,12 +16,16 @@ class WordGameController {
                 $this->gameOver();
                 break;
             case "logout":
-                $this->session_destroy();
+                $this->logout();
             case "login":
             default:
                 $this->login();
                 break;
         }
+    }
+
+    public function logout() {
+        session_destroy();
     }
 
     // Display the login page (and handle login logic)
