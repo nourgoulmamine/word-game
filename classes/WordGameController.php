@@ -65,8 +65,6 @@ class WordGameController
     // Load word ?
     private function loadQuestion()
     {
-
-        $file = file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false);
         $words = explode("\n", file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false));
 
         $rand = rand(0, count($words));
@@ -109,20 +107,21 @@ class WordGameController
                 $common_letters = similar_text($_SESSION["answer"], $answer);
 
                 // How many letters were in the correct location
-                $real_answer_length = strlen($_SESSION["answer"]);
+                $answer_length = min(strlen($_SESSION["answer"]), strlen($answer));
                 $letters = 0; // amount of letters you got right
-                for ($i = 0; $i < $real_answer_length; $i++) {
+                for ($i = 0; $i < $answer_length; $i++) {
                     if (strcasecmp($answer[$i], $_SESSION["answer"][$i]) == 0) {
                         $letters += 1;
                     }
                 }
- // added
+
                 // If the guessed word was too long or short
                 $length = "";
+                $real_length = strlen($_SESSION["answer"]);
                 $user_answer = strlen($answer);
-                if ($user_answer > $real_answer_length) {
+                if ($user_answer > $real_length) {
                     $length = "too long";
-                } elseif ($user_answer < $real_answer_length) {
+                } elseif ($user_answer < $real_length) {
                     $length = "too short";
                 } else {
                     $length = "the same length";

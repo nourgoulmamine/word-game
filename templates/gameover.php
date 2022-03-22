@@ -18,10 +18,15 @@
                 <h3>Thanks for playing!</h3>
             </div>
             <div class="h-40 p-5 bg-light border rounded-3">
+            <?php
+                if (!empty($error_msg)) {
+                    echo "<div class='alert alert-danger'>$error_msg</div>";
+                }
+                ?>
                 <h3>Number of guesses: <?= $_SESSION["guesses"] ?>.</h3>
                 <h3>The word was <?= $_SESSION["answer"] ?>.</h3>
                 <div class="text-center">
-                    <button type="?command=question" class="btn btn-primary">Play Again</button>
+                    <a href="?command=question" class="btn btn-primary">Play Again</a>
                     <a href="?command=logout" class="btn btn-danger">End Game</a>
                 </div>
             </div>

@@ -19,13 +19,15 @@
 
         </div>
         <div class="row">
+        <?php
+                if (!empty($error_msg)) {
+                    echo "<div class='alert alert-danger'>$error_msg</div>";
+                }
+                ?>
             <div class="col-xs-8 mx-auto">
                 <form action="?command=question" method="post">
                     <div class="h-40 p-5 bg-light border rounded-3">
                         <h2>Guess the word. Guess #<?= $user["guesses"] ?></h2>
-                        <p><?= $question ?></p>
-                        <p><?= $user["wordList"] ?></p>
-                        <input type="hidden" name="questionid" value="<?= $question["id"] ?>" />
                     </div>
                     <?= $message ?>
                     <div class="h-10 p-5 mb-3">
