@@ -28,6 +28,7 @@
                 <form action="?command=question" method="post">
                     <div class="h-40 p-5 bg-light border rounded-3">
                         <h2>Guess the word. Guess #<?= $user["guesses"] ?></h2>
+                        <p><?= $user["wordList"] ?></p>
                     </div>
                     <?= $message ?>
                     <div class="h-10 p-5 mb-3">
