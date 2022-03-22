@@ -1,4 +1,5 @@
 <?php
+// PUBLISHED: https://cs4640.cs.virginia.edu/ng9sc/hw4/
 // Sources used: https://cs4640.cs.virginia.edu
 // https://www.php.net/manual/en/function.strcmp.php
 // https://www.w3schools.com/php/php_looping_for.asp
