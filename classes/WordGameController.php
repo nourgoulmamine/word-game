@@ -69,8 +69,8 @@ class WordGameController
         $file = file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false);
         $words = explode("\n", file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false));
 
-        //        $rand = rand(0, count($words));
-        //        return $words[$rand]; // return random word
+        $rand = rand(0, count($words));
+        return $words[$rand]; // return random word
     }
 
 
@@ -97,9 +97,6 @@ class WordGameController
             $_SESSION["guesses"] = $user["guesses"];
             array_push($_SESSION["wordList"], $answer); // list of guessed words
             $user["wordList"] = json_encode($_SESSION["wordList"]);
-
-
-            // echo "<script>console.log('cookie Debug Objects: " .json_encode($_COOKIE["wordList"]). "' );</script>";
 
             //see if user's guess is the answer
             if ($_SESSION["answer"] == strtolower($answer)) {
