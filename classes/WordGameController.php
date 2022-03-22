@@ -100,7 +100,15 @@ class WordGameController
                 header("Location: ?command=gameOver");
             } else {
                 // How many letters you got right
-                $common_letters = similar_text($_SESSION["answer"], $answer);
+                $common = array();
+                for($i=0; $i<strlen($_SESSION["answer"]); $i++){
+                    if(strpos($answer, $_SESSION["answer"][$i]) !== false){
+                        array_push($common, $_SESSION["answer"][$i]);
+                    }
+                }
+                $common = array_unique($common);
+                $common_letters = count($common);
+
 
                 // How many letters were in the correct location
                 $answer_length = min(strlen($_SESSION["answer"]), strlen($answer));
