@@ -5,7 +5,8 @@
 // https://www.w3schools.com/php/php_looping_for.asp
 // https://stackoverflow.com/questions/51731048/php-7-2-7-warning-use-of-undefined-constant
 // https://stackoverflow.com/questions/48236765/undefined-constant-error-in-php-7-2
-// Partnered with Selena Johnson
+// https://www.w3schools.com/tags/att_input_required.asp
+// Partnered with Selena Johnson (Scj4ve)
 
 // Start session
 session_start();
@@ -21,7 +22,7 @@ $command = "login";
 if (isset($_GET["command"]))
     $command = $_GET["command"];
 
-if (!isset($_SESSION["email"])) {
+if (!isset($_SESSION["email"]) || !isset($_SESSION["name"])) {
     $command = "login";
 }
 
