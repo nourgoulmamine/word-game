@@ -35,7 +35,7 @@ class WordGameController
     // Display the login page (and handle login logic)
     public function login()
     {
-        if (isset($_POST["email"]) && !empty($_POST["email"]) && isset($_POST["name"]) && !empty($_POST["name"])) {
+        if (isset($_POST["email"]) && !empty($_POST["email"])) {
             $_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
             $_SESSION["wordList"] = array();
@@ -67,7 +67,7 @@ class WordGameController
     {
         $words = explode("\n", file_get_contents("https://www.cs.virginia.edu/~jh2jf/courses/cs4640/spring2022/wordlist.txt", false));
 
-        $rand = rand(0, count($words)-1);
+        $rand = rand(0, count($words));
         return $words[$rand]; // return random word
     }
 
